@@ -18,7 +18,7 @@ public class ObjectSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		timer -= Time.deltaTime;
-		if (timer <= 0) {
+		if (timer <= 0 && PlayerScript.PlayerInstance.canPlay) {
 			Vector3 objPos = new Vector3 (Random.Range(-3.6f, 3.6f), spwaner.position.y, 0);
 			int ramIndx = Random.Range (0, objects.Length);
 			for(int i =0; i < objects.Length; i++)

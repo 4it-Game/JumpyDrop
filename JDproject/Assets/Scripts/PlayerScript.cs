@@ -2,19 +2,22 @@
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
-
-	public float moveSpeed = 2;
-	public float clickForce = 10;
-	public float gravity = 1;
+	
 	private int inputDir = 1;
 	private float verticalVelocity;
 	private Vector3 moveVector; 
 	private CharacterController controller;
 	private Transform thisTransform = null;
+	public float moveSpeed = 2;
+	public float clickForce = 10;
+	public float gravity = 1;
 	public static PlayerScript PlayerInstance;
 	public GameObject DeathPartical = null;
+	public bool canPlay = false;
+	private ParticleEmitter dParti;
 
 	void Awake () {
+		PlayerInstance = this;
 		thisTransform = GetComponent<Transform>();
 	}
 
@@ -24,11 +27,13 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetMouseButtonDown(0)) {
-			inputDir = InputDirection (inputDir);
+		if (canPlay) {
+			if (Input.GetMouseButtonDown(0)) {
+				inputDir = InputDirection (inputDir);
+			}
+			moveVector = new Vector3 (InputDirection (inputDir) * clickForce,gravity,0);
+			controller.Move(moveVector * moveSpeed * Time.deltaTime);
 		}
-		moveVector = new Vector3 (InputDirection (inputDir) * clickForce,gravity,0);
-		controller.Move(moveVector * moveSpeed * Time.deltaTime);
 
 	}
 
@@ -42,18 +47,31 @@ public class PlayerScript : MonoBehaviour {
 		case "Obstical":
 			Die ();
 			break;
+		case "Wall":
+			LevelManager.Instance.SetScore ();
+			break;
+		case "PowerUp":
+			PowerUp ();
+			Destroy (hit.gameObject);
+			break;
 		default:
 			break;
 		}
 	}
 
-	public static void Die(){
+	public void PowerUp(){
+		Debug.Log ("Player Can destroy Cubes, with partical");
+		LevelManager.Instance.SetScore ();
+	}
+
+	public void Die(){
+
+		canPlay = false;
 
 		if (PlayerScript.PlayerInstance.DeathPartical != null) 
 		{
-			
 			Instantiate (PlayerScript.PlayerInstance.DeathPartical,PlayerScript.PlayerInstance.thisTransform.position,PlayerScript.PlayerInstance.thisTransform.rotation);
+
 		}
-		//Destroy (PlayerScript.PlayerInstance.gameObject);
 	}
 }
