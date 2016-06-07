@@ -67,7 +67,7 @@ public class PlayerScript : MonoBehaviour {
 	public void Die(){
 
 		canPlay = false;
-
+		StartCoroutine (CameraShake.Shake (Camera.main.gameObject.transform, 0.1f));
 		if (PlayerScript.PlayerInstance.DeathPartical != null) 
 		{
 			Instantiate (PlayerScript.PlayerInstance.DeathPartical,PlayerScript.PlayerInstance.thisTransform.position,PlayerScript.PlayerInstance.thisTransform.rotation);

@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour {
 
 	public static LevelManager Instance{ set; get; }
 	private int score = 0;
-	public Text socreText;
+	public Text scoreText;
 	public GameObject PlayerPanel;
 
 	void Start(){
@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void SetScore(){
 		score++;
-		Debug.Log ("print score" + score);
+		scoreText.text = score.ToString();
 	}
 
 	public void GameOver(){

@@ -87,6 +87,7 @@
      <Compile Include="Assets\MaterialUI\Scripts\Toaster.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
+     <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\Help\TUNNELColor.cs" />
      <Compile Include="Assets\Scripts\Help\Utils.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
