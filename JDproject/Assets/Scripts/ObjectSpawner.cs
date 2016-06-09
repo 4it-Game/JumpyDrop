@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ObjectSpawner : MonoBehaviour {
 
+	public GameObject powerUp;
 	public Transform[] objects;
 	public Transform spwaner;
 	public float maxPos = 12f;
@@ -26,4 +27,5 @@ public class ObjectSpawner : MonoBehaviour {
 			timer = delayTimer;
 		}
 	}
+
 }

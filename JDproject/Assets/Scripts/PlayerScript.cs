@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour {
 		if (canPlay) {
 			if (Input.GetMouseButtonDown(0)) {
 				inputDir = InputDirection (inputDir);
+				LevelManager.Instance.SetScore ();
 			}
 			moveVector = new Vector3 (InputDirection (inputDir) * clickForce,gravity,0);
 			controller.Move(moveVector * moveSpeed * Time.deltaTime);
@@ -46,9 +47,6 @@ public class PlayerScript : MonoBehaviour {
 		switch(hit.gameObject.tag){
 		case "Obstical":
 			Die ();
-			break;
-		case "Wall":
-			LevelManager.Instance.SetScore ();
 			break;
 		case "PowerUp":
 			PowerUp ();
